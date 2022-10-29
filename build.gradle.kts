@@ -1,5 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val ktorVersion: String by project
+val ktormVersion: String by project
+val logbackVersion: String by project
+val ktormMySQLVersion: String by project
+
 plugins {
     kotlin("jvm") version "1.7.20"
 }
@@ -12,10 +17,14 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:2.1.3")
-    implementation("io.ktor:ktor-server-netty:2.1.3")
-    implementation("ch.qos.logback:logback-classic:1.4.4")
+    implementation("io.ktor:ktor-server-core:${ktorVersion}")
+    implementation("io.ktor:ktor-server-netty:${ktorVersion}")
+    implementation("ch.qos.logback:logback-classic:${logbackVersion}")
+    implementation("org.ktorm:ktorm-core:${ktormVersion}")
+    implementation("org.ktorm:ktorm-support-mysql:${ktormVersion}")
     testImplementation(kotlin("test"))
+    testImplementation("org.ktorm:ktorm-support-sqlite:${ktormVersion}")
+    testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
 }
 
 tasks.test {
